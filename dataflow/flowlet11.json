@@ -1,0 +1,44 @@
+{
+	"name": "flowlet11",
+	"properties": {
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "split1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "input1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          CustomerID as string,",
+				"          City as string,",
+				"          NoOfChildren as string,",
+				"          MinAgeOfChild as string,",
+				"          MaxAgeOfChild as string,",
+				"          Tenure as string,",
+				"          FrquncyOfPurchase as string,",
+				"          NoOfUnitsPurchased as string,",
+				"          FrequencyOFPlay as string,",
+				"          NoOfGamesPlayed as string,",
+				"          NoOfGamesBought as string,",
+				"          FavoriteChannelOfTransaction as string,",
+				"          FavoriteGame as string,",
+				"          TotalRevenueGenerated as string",
+				"     ),",
+				"     order: 0,",
+				"     allowSchemaDrift: true) ~> input1",
+				"input1 split(equals(City,'1'),",
+				"     disjoint: false) ~> split1@(city1, city2)",
+				"split1@city1 filter(ERROR_FUNCTION('')) ~> filter1"
+			]
+		}
+	}
+}
